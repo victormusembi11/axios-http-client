@@ -61,6 +61,18 @@ function patchTodo() {
 document.getElementById('patch').addEventListener('click', patchTodo);
 
 
+// DELETE Request
+function deleteTodo() {
+    axios({
+        method: 'delete',
+        url: 'http://jsonplaceholder.typicode.com/todos/1',
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err))
+}
+
+document.getElementById('delete').addEventListener('click', deleteTodo);
+
 // Show output in browser
 function showOutput(res) {
     document.getElementById('res').innerHTML = `
