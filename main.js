@@ -103,6 +103,20 @@ function getData() {
 document.getElementById('sim-req').addEventListener('click', getData);
 
 
+// Interceptors - Intercepting requests & responses
+axios.interceptors.request.use(
+    config => {
+        console.log(
+            `${config.method.toUpperCase()} request sent to ${config.url} at ${new Date().getTime()}`
+        );
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+
 // Show output in browser
 function showOutput(res) {
     document.getElementById('res').innerHTML = `
