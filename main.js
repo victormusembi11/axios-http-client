@@ -73,6 +73,36 @@ function deleteTodo() {
 
 document.getElementById('delete').addEventListener('click', deleteTodo);
 
+
+// Simultaneous data
+function getData() {
+    axios.all([
+        axios({
+            method: 'get',
+            url: 'http://jsonplaceholder.typicode.com/todos/',
+            params: {
+                _limit: 5
+            }
+        }),
+        axios({
+            method: 'get',
+            url: 'http://jsonplaceholder.typicode.com/posts/',
+            params: {
+                _limit: 5
+            }
+        })
+    ])
+    .then(res => {
+        console.log(res[0]);
+        console.log(res[1]);
+        showOutput(res[0]); // or showOutput(res[1]);
+    })
+    .catch(err => console.log(err));
+}
+
+document.getElementById('sim-req').addEventListener('click', getData);
+
+
 // Show output in browser
 function showOutput(res) {
     document.getElementById('res').innerHTML = `
