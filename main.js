@@ -12,6 +12,20 @@ function getTodos() {
 }
 
 document.getElementById('get').addEventListener('click', getTodos);
+document.getElementById('post').addEventListener('click', addTodo);
+
+function addTodo() {
+    axios({
+        method: 'post',
+        url: 'https://jsonplaceholder.typicode.com/todos',
+        data: {
+            title: 'New Todo',
+            completed: false
+        }
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
 
 // Show output in browser
 function showOutput(res) {
