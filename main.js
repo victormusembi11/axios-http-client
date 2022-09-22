@@ -65,7 +65,7 @@ document.getElementById('patch').addEventListener('click', patchTodo);
 function deleteTodo() {
     axios({
         method: 'delete',
-        url: 'http://jsonplaceholder.typicode.com/todos/1',
+        url: 'https://jsonplaceholder.typicode.com/todos/1',
     })
     .then(res => showOutput(res))
     .catch(err => console.error(err))
@@ -79,14 +79,14 @@ function getData() {
     axios.all([
         axios({
             method: 'get',
-            url: 'http://jsonplaceholder.typicode.com/todos/',
+            url: 'https://jsonplaceholder.typicode.com/todos/',
             params: {
                 _limit: 5
             }
         }),
         axios({
             method: 'get',
-            url: 'http://jsonplaceholder.typicode.com/posts/',
+            url: 'https://jsonplaceholder.typicode.com/posts/',
             params: {
                 _limit: 5
             }
@@ -115,6 +115,27 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+
+// Custom Headers - E.g you need to be logged in to make a post
+function customHeader() {
+    axios({
+        method: 'post',
+        url: 'https://jsonplaceholder.typicode.com/todos',
+        data: {
+            title: 'New Todo',
+            completed: false
+        },
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'sometoken'
+        }
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+document.getElementById('custom-headers').addEventListener('click', customHeader);
 
 
 // Show output in browser
