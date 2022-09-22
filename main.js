@@ -12,8 +12,8 @@ function getTodos() {
 }
 
 document.getElementById('get').addEventListener('click', getTodos);
-document.getElementById('post').addEventListener('click', addTodo);
 
+// POST Request
 function addTodo() {
     axios({
         method: 'post',
@@ -26,6 +26,40 @@ function addTodo() {
     .then(res => showOutput(res))
     .catch(err => console.error(err));
 }
+
+document.getElementById('post').addEventListener('click', addTodo);
+
+// PUT Request
+function updateTodo() {
+    axios({
+        method: 'put',
+        url: 'https://jsonplaceholder.typicode.com/todos/1',
+        data: {
+            title: 'Updated Todo',
+            completed: true
+        }
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+document.getElementById('put').addEventListener('click', updateTodo);
+
+// PATCH Request
+function patchTodo() {
+    axios({
+        method: 'patch',
+        url: 'https://jsonplaceholder.typicode.com/todos/1',
+        data: {
+            title: 'Patched Todo',
+        }
+    })
+    .then(res => showOutput(res))
+    .catch(err => console.error(err));
+}
+
+document.getElementById('patch').addEventListener('click', patchTodo);
+
 
 // Show output in browser
 function showOutput(res) {
